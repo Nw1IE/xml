@@ -13,7 +13,7 @@ namespace xml
         {
 
             var acc = PaymentAccount.FromJson("accTrue.json");
-            Console.WriteLine(acc);
+            Console.WriteLine(acc.ToString());
            /* var acc = new PaymentAccount(100m, 3, 50m, 4);
             Console.WriteLine(acc.ToString());
             acc.ToJson("accTrue.json");
