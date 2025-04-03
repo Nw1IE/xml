@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using NewPractice_27._03_;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -62,7 +63,7 @@ namespace xml
             company.AppendChild(employee2);
             doc.Save("Company.xml");*/
 
-            XmlDocument doc = new XmlDocument();
+            /*XmlDocument doc = new XmlDocument();
             doc.Load("Company.xml");
 
             XmlNodeList employees = doc.SelectNodes("//Employee");
@@ -73,8 +74,17 @@ namespace xml
                 string name = item["Name"]?.InnerText;
                 int age = Convert.ToInt32(item["Age"]?.InnerText);
                 Console.WriteLine($"{id}, {name}");
-            }
-           
+            }*/
+
+            /*var acc = new PaymentAccount(100m, 3, 50m, 4);
+            Console.WriteLine(acc.ToString());
+            acc.ToXmlFile("accTrue.xml");
+
+            PaymentAccount.SerializeComputedFields = false;
+            acc.ToXmlFile("accFalse.xml");*/
+
+            var acc = PaymentAccount.FromXml("accTrue.xml");
+            Console.WriteLine(acc.ToString());
 
         }
     }
