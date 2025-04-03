@@ -1,4 +1,4 @@
-﻿
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -45,6 +45,9 @@ namespace NewPractice_27._03_ // партиал класс это класс к�
 
         public static bool SerializeComputedFields { get; set; }
 
+        public bool ShouldSerializeTotalWithoutPenalty() => SerializeComputedFields;
+        public bool ShouSerializePenalty() => SerializeComputedFields;
+        public bool ShouldSerializeTotalWithPenalty() => SerializeComputedFields;
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -127,7 +130,36 @@ namespace NewPractice_27._03_ // партиал класс это класс к�
                 }
             }
         }
+        // сериализация в JSON
+        public void ToJson(string path)
+        {
+           try
+           {
+                string json = JsonConvert.SerializeObject
+                (this, Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText(path, json);
+           }
+           catch(Exception e)
+           {
+                Console.WriteLine(e.Message);
+           }
+        }
 
+        //Десериализация из Json
+        public static PaymentAccount FromJson(string path)
+        {
+            try
+            {
+                string json = File.ReadAllText(path);
+                return JsonConvert.DeserializeObject<PaymentAccount>(json);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+
+            }
+        }
 
         // Переопределения ToString для удобного вывода
         public override string ToString()

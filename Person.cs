@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +11,20 @@ namespace NewPractice_2._04_
 {
     // сереализация в xml
 
-
-    [Serializable]
-    [XmlRoot("Employee")]   // переименование корневого элемента
+   /* [Serializable]
+    [XmlRoot("Employee")]   */// переименование корневого элемента
     public class Person
     {
-        [XmlElement("FullName")]
+        [JsonProperty("full_name")]
+        /*[XmlElement("FullName")]*/
         public string Name { get; set; }   // преобразовавается в элемент с таким названием при сереализации
-
-        [XmlAttribute("Id")]
-        public int Id { get; set; }   // преобразовавается в атрибут при сереализации
-
+        [JsonIgnore]
+/*        [XmlAttribute("Id")]
+*/      public int Id { get; set; }   // преобразовавается в атрибут при сереализации
+        
         public int Age { get; set; }
-
-        [XmlIgnore]
+        
+        /*[XmlIgnore]*/
         public string Adress { get; set; }   // игнорирование при сереализации
 
         // сереализация массива в xml

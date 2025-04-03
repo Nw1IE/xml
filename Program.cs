@@ -1,7 +1,9 @@
-﻿using NewPractice_27._03_;
+﻿using NewPractice_2._04_;
+using NewPractice_27._03_;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace xml
 {
@@ -9,6 +11,16 @@ namespace xml
     {
         static void Main(string[] args)
         {
+
+            var acc = PaymentAccount.FromJson("accTrue.json");
+            Console.WriteLine(acc);
+           /* var acc = new PaymentAccount(100m, 3, 50m, 4);
+            Console.WriteLine(acc.ToString());
+            acc.ToJson("accTrue.json");
+            PaymentAccount.SerializeComputedFields = false;
+            acc.ToJson("accTrue.json");*/
+
+
             /*XDocument doc = new XDocument(
                 new XDeclaration("1.0", "utf-8", "yes"),
                 new XElement("Company",
@@ -82,9 +94,70 @@ namespace xml
 
             PaymentAccount.SerializeComputedFields = false;
             acc.ToXmlFile("accFalse.xml");*/
+            /*
+                        var acc = PaymentAccount.FromXml("accTrue.xml");
+                        Console.WriteLine(acc.ToString());*/
 
-            var acc = PaymentAccount.FromXml("accTrue.xml");
-            Console.WriteLine(acc.ToString());
+    /*        var pers = new Person
+            {
+                Name = "Test",
+                *//*Adress = "Test st.",
+                Age = 22,
+                Id = 1*//*
+            };
+            *//*string json1 = @"{
+             ""Name"": ""Test"",
+             ""Id"": 1,
+             ""Age"": 22,
+             ""Adress"": ""Test st.""
+            }";
+            JsonConvert.PopulateObject(json1, pers);
+            Console.WriteLine(pers.Age);*//*
+
+
+            string json3 = @"{
+""Employees"": [
+{""Name"": ""Pete"", ""Age"": 20},
+{""Name"": ""Anny"", ""Age"": 18},
+{""Name"": ""John"", ""Age"": 24}
+]
+}";
+            JObject obj = JObject.Parse(json3);
+            var names = obj["Employees"]
+                .Select(e => e["Name"].ToString())
+                .ToList();
+            foreach (var item in names)
+            {
+                Console.WriteLine(item);
+            }
+*/
+            /*string json2 = JsonConvert.SerializeObject
+                (pers, Formatting.Indented);
+            Console.WriteLine (json);
+            File.WriteAllText("person.json", json);*/
+            /*
+                        string json4 = JsonConvert.SerializeObject
+                            (pers, Newtonsoft.Json.Formatting.Indented);
+                        Console.WriteLine(json4);*/
+            /*string json = @"{
+  ""Name"": ""Test"",
+  ""Id"": 1,
+  ""Age"": 22,
+  ""Adress"": ""Test st.""
+}";*/
+
+            /*  Person person = JsonConvert.DeserializeObject<Person>(json);
+              Console.WriteLine(person.Age);*/
+            /*
+                        Person person1 = JsonConvert.DeserializeObject<Person>(json);
+                        Console.WriteLine(person.Name);
+                        Person person2 = JsonConvert.DeserializeObject<Person>(json);
+                        Console.WriteLine(person.Id);*/
+
+
+
+
+
 
         }
     }
